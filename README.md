@@ -2,9 +2,11 @@
 
 Reactive tool support for Spring AI MCP servers. Write `@ReactiveTool` methods returning `Mono<T>` or `Flux<T>` without calling `.block()`.
 
-## The Problem
+## Motivation
 
-Spring AI's `@Tool` annotation does not support reactive return types. If your MCP tool needs to call a reactive API (WebClient, R2DBC, reactive MongoDB, etc.), you're forced to `.block()` inside the method body, losing the benefits of reactive programming and risking thread starvation.
+Spring AI's `@Tool` annotation does not support reactive return types ([#1778](https://github.com/spring-projects/spring-ai/issues/1778), [#4434](https://github.com/spring-projects/spring-ai/issues/4434), [#2761](https://github.com/spring-projects/spring-ai/issues/2761)). If your MCP tool needs to call a reactive API (WebClient, R2DBC, reactive MongoDB, etc.), you're forced to `.block()` inside the method body, losing the benefits of reactive programming and risking thread starvation.
+
+This library provides a temporary bridge until Spring AI adds native reactive support to `@Tool`. It integrates with the existing Spring AI ecosystem (`ToolCallback`, `ToolCallbackProvider`), so migration will be straightforward when native support lands.
 
 ## The Solution
 
