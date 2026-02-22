@@ -23,7 +23,7 @@ Supported return types:
 <dependency>
     <groupId>io.github.massimilianopili</groupId>
     <artifactId>spring-ai-reactive-tools</artifactId>
-    <version>0.1.0</version>
+    <version>0.2.0</version>
 </dependency>
 ```
 
@@ -106,6 +106,26 @@ Per-tool timeout can be set via the annotation:
 @ReactiveTool(name = "slow_operation", description = "...", timeoutMs = 60000)
 public Mono<String> slowOperation() { ... }
 ```
+
+## Parallel Tool Execution
+
+Since v0.2.0, the library includes a `ParallelToolCallingManager` that replaces Spring AI's `DefaultToolCallingManager` to execute multiple tool calls concurrently ([#5195](https://github.com/spring-projects/spring-ai/issues/5195)).
+
+When an LLM responds with 3 independent tool calls each taking 2s, sequential execution takes ~6s. With parallel execution, it takes ~2s.
+
+Enable it in your application properties:
+
+```properties
+spring.ai.reactive-tools.parallel.enabled=true
+spring.ai.reactive-tools.parallel.max-concurrency=10
+spring.ai.reactive-tools.parallel.timeout-ms=30000
+```
+
+The parallel manager automatically uses the reactive `callReactive()` path for `@ReactiveTool` methods and falls back to regular `call()` for standard `@Tool` methods. Error handling is collect-all: a failure in one tool does not block the others.
+
+## Real-world Usage
+
+This library powers [SIMOGE-MCP](https://github.com/massimilianopili/simoge-mcp), a production MCP server exposing 30+ tools (database queries, file system, Azure DevOps, API proxy). All `@ReactiveTool` methods (WebFlux HTTP calls, Azure DevOps API) run alongside sync `@Tool` methods (JDBC, file I/O) — tested with 18 parallel tool calls completing successfully with zero errors.
 
 ## How It Works
 

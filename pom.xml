@@ -7,7 +7,7 @@
 
     <groupId>io.github.massimilianopili</groupId>
     <artifactId>spring-ai-reactive-tools</artifactId>
-    <version>0.1.0</version>
+    <version>0.2.0</version>
     <packaging>jar</packaging>
 
     <name>Spring AI Reactive Tools</name>
