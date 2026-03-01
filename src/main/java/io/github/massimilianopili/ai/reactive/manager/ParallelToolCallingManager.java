@@ -80,12 +80,11 @@ public class ParallelToolCallingManager implements ToolCallingManager {
             return delegate.executeToolCalls(prompt, chatResponse);
         }
 
-        log.info("Executing {} tool calls in parallel (max concurrency: {})",
-                toolCalls.size(), maxConcurrency);
+        log.info("Executing {} tool calls in parallel using virtual threads",
+                toolCalls.size());
 
-        // Resolve callbacks and execute in parallel
-        ExecutorService executor = Executors.newFixedThreadPool(
-                Math.min(toolCalls.size(), maxConcurrency));
+        // Virtual threads: lightweight, ideal for I/O-bound tool calls (HTTP, DB, filesystem)
+        ExecutorService executor = Executors.newVirtualThreadPerTaskExecutor();
 
         try {
             List<CompletableFuture<ToolResponseMessage.ToolResponse>> futures = new ArrayList<>();
