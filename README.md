@@ -23,11 +23,11 @@ Supported return types:
 <dependency>
     <groupId>io.github.massimilianopili</groupId>
     <artifactId>spring-ai-reactive-tools</artifactId>
-    <version>0.2.0</version>
+    <version>0.3.0</version>
 </dependency>
 ```
 
-Requires Java 17+ and Spring AI 1.0.0+.
+Requires Java 21+ and Spring AI 1.0.0+.
 
 ## Quick Start
 
@@ -140,7 +140,7 @@ This library powers [SIMOGE-MCP](https://github.com/massimilianopili/simoge-mcp)
 
 ## Requirements
 
-- Java 17+
+- Java 21+
 - Spring AI 1.0.0+
 - Spring Boot 3.4+ (for auto-configuration)
 - Project Reactor (transitive)
