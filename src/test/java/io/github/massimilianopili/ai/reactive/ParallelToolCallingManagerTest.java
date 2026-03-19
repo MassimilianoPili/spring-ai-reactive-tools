@@ -85,7 +85,7 @@ class ParallelToolCallingManagerTest {
                 new AssistantMessage.ToolCall("3", "function", "slow_tool_3", "{}")
         );
 
-        AssistantMessage assistantMsg = new AssistantMessage("", Map.of(), toolCalls);
+        AssistantMessage assistantMsg = AssistantMessage.builder().content("").toolCalls(toolCalls).build();
         ChatResponse chatResponse = new ChatResponse(List.of(new Generation(assistantMsg)));
         Prompt prompt = new Prompt(List.of(new UserMessage("test")));
 
@@ -107,7 +107,7 @@ class ParallelToolCallingManagerTest {
                 new AssistantMessage.ToolCall("3", "function", "slow_tool_3", "{}")
         );
 
-        AssistantMessage assistantMsg = new AssistantMessage("", Map.of(), toolCalls);
+        AssistantMessage assistantMsg = AssistantMessage.builder().content("").toolCalls(toolCalls).build();
         ChatResponse chatResponse = new ChatResponse(List.of(new Generation(assistantMsg)));
         Prompt prompt = new Prompt(List.of(new UserMessage("test")));
 
@@ -126,7 +126,7 @@ class ParallelToolCallingManagerTest {
                 new AssistantMessage.ToolCall("3", "function", "slow_tool_3", "{}")
         );
 
-        AssistantMessage assistantMsg = new AssistantMessage("", Map.of(), toolCalls);
+        AssistantMessage assistantMsg = AssistantMessage.builder().content("").toolCalls(toolCalls).build();
         ChatResponse chatResponse = new ChatResponse(List.of(new Generation(assistantMsg)));
         Prompt prompt = new Prompt(List.of(new UserMessage("test")));
 
@@ -141,7 +141,7 @@ class ParallelToolCallingManagerTest {
                 new AssistantMessage.ToolCall("1", "function", "slow_tool_1", "{}")
         );
 
-        AssistantMessage assistantMsg = new AssistantMessage("", Map.of(), toolCalls);
+        AssistantMessage assistantMsg = AssistantMessage.builder().content("").toolCalls(toolCalls).build();
         ChatResponse chatResponse = new ChatResponse(List.of(new Generation(assistantMsg)));
         Prompt prompt = new Prompt(List.of(new UserMessage("test")));
 

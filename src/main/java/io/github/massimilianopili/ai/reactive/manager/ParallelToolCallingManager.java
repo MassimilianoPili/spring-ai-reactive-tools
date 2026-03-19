@@ -22,6 +22,7 @@ import reactor.core.scheduler.Schedulers;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -118,7 +119,7 @@ public class ParallelToolCallingManager implements ToolCallingManager {
             // Build conversation history
             List<Message> conversationHistory = new ArrayList<>(prompt.getInstructions());
             conversationHistory.add(assistantMessage);
-            conversationHistory.add(new ToolResponseMessage(responses));
+            conversationHistory.add(ToolResponseMessage.builder().responses(responses).build());
 
             return DefaultToolExecutionResult.builder()
                     .conversationHistory(conversationHistory)
