@@ -7,7 +7,7 @@
 
     <groupId>io.github.massimilianopili</groupId>
     <artifactId>spring-ai-reactive-tools</artifactId>
-    <version>0.4.0</version>
+    <version>0.5.0</version>
     <packaging>jar</packaging>
 
     <name>Spring AI Reactive Tools</name>
@@ -191,4 +191,11 @@
         </plugins>
     </build>
 
+
+    <distributionManagement>
+        <repository>
+            <id>gitea</id>
+            <url>http://gitea:3000/api/packages/sol_root/maven</url>
+        </repository>
+    </distributionManagement>
 </project>

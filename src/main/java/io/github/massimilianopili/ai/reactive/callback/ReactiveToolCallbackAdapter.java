@@ -34,6 +34,9 @@ public class ReactiveToolCallbackAdapter implements ReactiveToolCallback {
     private final String toolName;
     private final String toolDescription;
     private final long timeoutMs;
+    private final boolean readOnly;
+    private final boolean destructive;
+    private final boolean idempotent;
     private final ToolDefinition toolDefinition;
     private final ReturnType returnType;
 
@@ -46,6 +49,9 @@ public class ReactiveToolCallbackAdapter implements ReactiveToolCallback {
         this.toolName = annotation.name();
         this.toolDescription = annotation.description();
         this.timeoutMs = annotation.timeoutMs();
+        this.readOnly = annotation.readOnly();
+        this.destructive = annotation.destructive();
+        this.idempotent = annotation.idempotent();
         this.returnType = detectReturnType(method);
         this.toolDefinition = DefaultToolDefinition.builder()
                 .name(toolName)
@@ -87,6 +93,18 @@ public class ReactiveToolCallbackAdapter implements ReactiveToolCallback {
     @Override
     public ToolDefinition getToolDefinition() {
         return toolDefinition;
+    }
+
+    public boolean isReadOnly() {
+        return readOnly;
+    }
+
+    public boolean isDestructive() {
+        return destructive;
+    }
+
+    public boolean isIdempotent() {
+        return idempotent;
     }
 
     // --- Private helpers ---

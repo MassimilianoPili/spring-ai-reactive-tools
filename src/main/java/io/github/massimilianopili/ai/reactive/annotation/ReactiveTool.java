@@ -38,4 +38,13 @@ public @interface ReactiveTool {
 
     /** Maximum time in milliseconds to wait for the reactive result. Default: 30 seconds. */
     long timeoutMs() default 30000;
+
+    /** Hint: this tool only reads data and does not modify state. */
+    boolean readOnly() default false;
+
+    /** Hint: this tool may perform destructive operations (delete, remove, prune). */
+    boolean destructive() default false;
+
+    /** Hint: calling this tool multiple times with the same arguments produces the same result. */
+    boolean idempotent() default false;
 }

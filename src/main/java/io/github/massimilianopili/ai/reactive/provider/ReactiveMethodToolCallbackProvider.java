@@ -106,7 +106,10 @@ public class ReactiveMethodToolCallbackProvider implements ToolCallbackProvider 
                     effectiveAnnotation = new ReactiveToolProxy(
                             annotation.name(),
                             annotation.description(),
-                            defaultTimeoutMs
+                            defaultTimeoutMs,
+                            annotation.readOnly(),
+                            annotation.destructive(),
+                            annotation.idempotent()
                     );
                 }
 
@@ -118,7 +121,8 @@ public class ReactiveMethodToolCallbackProvider implements ToolCallbackProvider 
     /**
      * Internal proxy for ReactiveTool annotation to override timeout.
      */
-    private record ReactiveToolProxy(String name, String description, long timeoutMs) implements ReactiveTool {
+    private record ReactiveToolProxy(String name, String description, long timeoutMs,
+                                         boolean readOnly, boolean destructive, boolean idempotent) implements ReactiveTool {
         @Override
         public Class<ReactiveTool> annotationType() {
             return ReactiveTool.class;
